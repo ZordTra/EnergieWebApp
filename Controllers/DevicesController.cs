@@ -22,7 +22,7 @@ namespace EnergieWebApp.Controllers
         // GET: Devices
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Devices.Include(d => d.Modes).Include(d => d.Type);
+            var applicationDbContext = _context.Devices.Include(d => d.Type);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace EnergieWebApp.Controllers
             }
 
             var device = await _context.Devices
-                .Include(d => d.Modes)
                 .Include(d => d.Type)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (device == null)
@@ -49,7 +48,6 @@ namespace EnergieWebApp.Controllers
         // GET: Devices/Create
         public IActionResult Create()
         {
-            ViewData["ModeId"] = new SelectList(_context.Modes, "Id", "Id");
             ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id");
             return View();
         }
@@ -59,7 +57,7 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ModeId,TypeDeviceId")] Device device)
+        public async Task<IActionResult> Create([Bind("Id,Name,TypeDeviceId,Mode,Kwh")] Device device)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,6 @@ namespace EnergieWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModeId"] = new SelectList(_context.Modes, "Id", "Id", device.ModeId);
             ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
             return View(device);
         }
@@ -85,7 +82,6 @@ namespace EnergieWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["ModeId"] = new SelectList(_context.Modes, "Id", "Id", device.ModeId);
             ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
             return View(device);
         }
@@ -95,7 +91,7 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ModeId,TypeDeviceId")] Device device)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,TypeDeviceId,Mode,Kwh")] Device device)
         {
             if (id != device.Id)
             {
@@ -122,7 +118,6 @@ namespace EnergieWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModeId"] = new SelectList(_context.Modes, "Id", "Id", device.ModeId);
             ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
             return View(device);
         }
@@ -136,7 +131,6 @@ namespace EnergieWebApp.Controllers
             }
 
             var device = await _context.Devices
-                .Include(d => d.Modes)
                 .Include(d => d.Type)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (device == null)
