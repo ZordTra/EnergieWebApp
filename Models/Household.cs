@@ -7,6 +7,6 @@
 
         public ICollection<Device> Devices { get; set; }
 
-        // User
+        public Account Account { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace EnergieWebApp.Data
         public DbSet<Mode> Modes { get; set; }
         public DbSet<DayData> DayDatas { get; set; }
         public DbSet<TypeDevice> TypeDevices { get; set; }
+        public DbSet<Account> AccountDatas { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
