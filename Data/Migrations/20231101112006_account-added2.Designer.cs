@@ -4,6 +4,7 @@ using EnergieWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnergieWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231101112006_account-added2")]
+    partial class accountadded2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,37 +24,6 @@ namespace EnergieWebApp.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EnergieWebApp.Models.Account", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("Admin")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("DayId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DayId");
-
-                    b.HasIndex("HouseholdId")
-                        .IsUnique();
-
-                    b.ToTable("AccountDatas");
-                });
 
             modelBuilder.Entity("EnergieWebApp.Models.DayData", b =>
                 {
@@ -357,23 +329,6 @@ namespace EnergieWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EnergieWebApp.Models.Account", b =>
-                {
-                    b.HasOne("EnergieWebApp.Models.DayData", "Day")
-                        .WithMany()
-                        .HasForeignKey("DayId");
-
-                    b.HasOne("EnergieWebApp.Models.Household", "Household")
-                        .WithOne("Account")
-                        .HasForeignKey("EnergieWebApp.Models.Account", "HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Day");
-
-                    b.Navigation("Household");
-                });
-
             modelBuilder.Entity("EnergieWebApp.Models.Device", b =>
                 {
                     b.HasOne("EnergieWebApp.Models.Household", null)
@@ -446,9 +401,6 @@ namespace EnergieWebApp.Data.Migrations
 
             modelBuilder.Entity("EnergieWebApp.Models.Household", b =>
                 {
-                    b.Navigation("Account")
-                        .IsRequired();
-
                     b.Navigation("Devices");
                 });
 #pragma warning restore 612, 618
