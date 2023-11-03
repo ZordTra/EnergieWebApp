@@ -7,7 +7,7 @@
         //forgein key user
         public bool? Admin { get; set; }
 
-        public int HouseholdId { get; set; }
+        public int? HouseholdId { get; set; }
         public Household? Household { get; set; }
 
         public DayData? Day { get; set; }

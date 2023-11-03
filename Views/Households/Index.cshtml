@@ -14,8 +14,12 @@
     <div>
         @foreach (var device in Model)
         {
-            @Html.DisplayNameFor(model => model.Name)
-            @Html.DisplayFor(modelItem => device.Name)
+            <a asp-action ="Details" asp-route-id="@device.Id" class="rectangle">
+                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayFor(modelItem => device.Name)
+                @* @Html.DisplayFor(modelItem => device.Kwh) *@
+            </a>
+            
 
         }
     </div>
