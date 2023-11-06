@@ -1,8 +1,71 @@
-﻿@{
+@model IEnumerable<Account>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <table class="scoretable">
+        <thead>
+            <tr>
+                <th style="width:50%">
+                    Gebruiker
+                </th>
+                <th>
+                    Score
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @* @foreach (var item in Model) *@
+            @*          <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Score)</td>
+            </tr> *@
+            <tr>
+                <td>Peter</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>Jan</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>Henk</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Karel</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>Piet</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Marjan</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Annie</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Klaas</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Miel</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
 </div>
