@@ -103,3 +103,38 @@ body {
 #datakop{
     background-color: #bcb6b6;
 }
+
+.scoretable {
+    width: 40%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: center;
+    position: absolute;
+    top: 250px;
+    right: 5.0%;
+}
+
+    .scoretable th {
+        background-color: #88b414;
+        color: white;
+        padding: 8px 12px;
+        border: 1px solid #e1e1e1;
+        font-size: 180%;
+    }
+    scoretable tr:nth-child(n+11) {
+
+    }
+    .scoretable tbody tr:nth-child(odd) {
+        background-color: #ecf0f1;
+        font-size: 150%;
+    }
+
+    .scoretable tbody tr:nth-child(even) {
+        background-color: #fff;
+        font-size: 150%;
+    }
+
+    .scoretable tbody tr:hover {
+        background-color: #b2e332;
+        color: black;
+    }
