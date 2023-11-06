@@ -3,14 +3,10 @@
     public class Account
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        //forgein key user
-        public bool? Admin { get; set; }
-
-        public int HouseholdId { get; set; }
-        public Household? Household { get; set; }
-
-        public DayData? Day { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public User? User { get; set; }
+        public Admin? Admin { get; set; }
 
     }
 }

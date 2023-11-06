@@ -4,6 +4,7 @@ using EnergieWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnergieWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231106111843_classesToegevoegd")]
+    partial class classesToegevoegd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,13 +67,18 @@ namespace EnergieWebApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AccountDatas");
                 });
 
             modelBuilder.Entity("EnergieWebApp.Models.Admin", b =>
@@ -93,7 +101,7 @@ namespace EnergieWebApp.Data.Migrations
                     b.HasIndex("AccountId")
                         .IsUnique();
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admin");
                 });
 
             modelBuilder.Entity("EnergieWebApp.Models.DayData", b =>
@@ -191,9 +199,6 @@ namespace EnergieWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<int>("HouseholdId")
                         .HasColumnType("int");
 
@@ -203,13 +208,10 @@ namespace EnergieWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId")
-                        .IsUnique();
-
                     b.HasIndex("HouseholdId")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -444,6 +446,15 @@ namespace EnergieWebApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EnergieWebApp.Models.Account", b =>
+                {
+                    b.HasOne("EnergieWebApp.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EnergieWebApp.Models.Admin", b =>
                 {
                     b.HasOne("EnergieWebApp.Models.Account", "Account")
@@ -477,12 +488,6 @@ namespace EnergieWebApp.Data.Migrations
 
             modelBuilder.Entity("EnergieWebApp.Models.User", b =>
                 {
-                    b.HasOne("EnergieWebApp.Models.Account", null)
-                        .WithOne("User")
-                        .HasForeignKey("EnergieWebApp.Models.User", "AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EnergieWebApp.Models.Household", "Household")
                         .WithOne("Account")
                         .HasForeignKey("EnergieWebApp.Models.User", "HouseholdId")
@@ -546,8 +551,6 @@ namespace EnergieWebApp.Data.Migrations
             modelBuilder.Entity("EnergieWebApp.Models.Account", b =>
                 {
                     b.Navigation("Admin");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EnergieWebApp.Models.Household", b =>
