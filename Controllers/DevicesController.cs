@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
+using EnergieWebApp.Modelview;
 
 namespace EnergieWebApp.Controllers
 {
@@ -48,7 +49,14 @@ namespace EnergieWebApp.Controllers
         // GET: Devices/Create
         public IActionResult Create()
         {
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id");
+            //ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name");
+            //var devices = await _context.Devices.Include(c => c.Type).FirstOrDefaultAsync(c => c.Id == id);
+            //ModelViewTypes model = new ModelViewTypes();
+            //model.Device = devices;
+            //return View(model);
+
+            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name");
+            ViewBag.Types = new SelectList(_context.TypeDevices, "Id", "Name");
             return View();
         }
 
@@ -82,7 +90,8 @@ namespace EnergieWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
+            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name", device.TypeDeviceId);
+            ViewBag.Types = new SelectList(_context.TypeDevices, "Id", "Name");
             return View(device);
         }
 

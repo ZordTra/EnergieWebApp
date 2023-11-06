@@ -15,16 +15,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="data">
+            <th class="data" id="datakop">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th class="data">
+            <th class="data" id="datakop">
                 @Html.DisplayNameFor(model => model.Type)
             </th>
-            <th class="data">
+            <th class="data" id="datakop">
                 @Html.DisplayNameFor(model => model.Mode)
             </th>
-            <th class="data">
+            <th class="data" id="datakop">
                 @Html.DisplayNameFor(model => model.Kwh)
             </th>
             <th></th>
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
                 <td class="data">
-                @Html.DisplayFor(modelItem => item.Type.Id)
+                @Html.DisplayFor(modelItem => item.Type.Name)
             </td>
                 <td class="data">
                 @Html.DisplayFor(modelItem => item.Mode)
