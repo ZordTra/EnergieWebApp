@@ -8,6 +8,8 @@
         public string DeviceId { get; set; }
         public ICollection<Device>? Devices { get; set; }
 
-        public Account? Account { get; set; }
+        public User Account { get; set; }
+
+
     }
 }

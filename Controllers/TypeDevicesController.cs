@@ -7,98 +7,90 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
-using EnergieWebApp.Modelview;
 
 namespace EnergieWebApp.Controllers
 {
-    public class DevicesController : Controller
+    public class TypeDevicesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public DevicesController(ApplicationDbContext context)
+        public TypeDevicesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Devices
+        // GET: TypeDevices
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Devices.Include(d => d.Type);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.TypeDevices != null ? 
+                          View(await _context.TypeDevices.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.TypeDevices'  is null.");
         }
 
-        // GET: Devices/Details/5
+        // GET: TypeDevices/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Devices == null)
+            if (id == null || _context.TypeDevices == null)
             {
                 return NotFound();
             }
 
-            var device = await _context.Devices
-                .Include(d => d.Type)
+            var typeDevice = await _context.TypeDevices
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (device == null)
+            if (typeDevice == null)
             {
                 return NotFound();
             }
 
-            return View(device);
+            return View(typeDevice);
         }
 
-        // GET: Devices/Create
+        // GET: TypeDevices/Create
         public IActionResult Create()
         {
-            
-
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name");
-            ViewBag.Types = new SelectList(_context.TypeDevices, "Id", "Name");
             return View();
         }
 
-        // POST: Devices/Create
+        // POST: TypeDevices/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,TypeDeviceId,Mode,Kwh")] Device device)
+        public async Task<IActionResult> Create([Bind("Id,Name")] TypeDevice typeDevice)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(device);
+                _context.Add(typeDevice);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name", device.TypeDeviceId);
-            return View(device);
+            return View(typeDevice);
         }
 
-        // GET: Devices/Edit/5
+        // GET: TypeDevices/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Devices == null)
+            if (id == null || _context.TypeDevices == null)
             {
                 return NotFound();
             }
 
-            var device = await _context.Devices.FindAsync(id);
-            if (device == null)
+            var typeDevice = await _context.TypeDevices.FindAsync(id);
+            if (typeDevice == null)
             {
                 return NotFound();
             }
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name", device.TypeDeviceId);
-            ViewBag.Types = new SelectList(_context.TypeDevices, "Id", "Name");
-            return View(device);
+            return View(typeDevice);
         }
 
-        // POST: Devices/Edit/5
+        // POST: TypeDevices/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,TypeDeviceId,Mode,Kwh")] Device device)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] TypeDevice typeDevice)
         {
-            if (id != device.Id)
+            if (id != typeDevice.Id)
             {
                 return NotFound();
             }
@@ -107,12 +99,12 @@ namespace EnergieWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(device);
+                    _context.Update(typeDevice);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DeviceExists(device.Id))
+                    if (!TypeDeviceExists(typeDevice.Id))
                     {
                         return NotFound();
                     }
@@ -123,51 +115,49 @@ namespace EnergieWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
-            return View(device);
+            return View(typeDevice);
         }
 
-        // GET: Devices/Delete/5
+        // GET: TypeDevices/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Devices == null)
+            if (id == null || _context.TypeDevices == null)
             {
                 return NotFound();
             }
 
-            var device = await _context.Devices
-                .Include(d => d.Type)
+            var typeDevice = await _context.TypeDevices
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (device == null)
+            if (typeDevice == null)
             {
                 return NotFound();
             }
 
-            return View(device);
+            return View(typeDevice);
         }
 
-        // POST: Devices/Delete/5
+        // POST: TypeDevices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Devices == null)
+            if (_context.TypeDevices == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Devices'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.TypeDevices'  is null.");
             }
-            var device = await _context.Devices.FindAsync(id);
-            if (device != null)
+            var typeDevice = await _context.TypeDevices.FindAsync(id);
+            if (typeDevice != null)
             {
-                _context.Devices.Remove(device);
+                _context.TypeDevices.Remove(typeDevice);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DeviceExists(int id)
+        private bool TypeDeviceExists(int id)
         {
-          return (_context.Devices?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.TypeDevices?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

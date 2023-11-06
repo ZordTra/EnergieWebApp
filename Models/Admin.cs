@@ -1,9 +1,12 @@
 ﻿namespace EnergieWebApp.Models
 {
-    public class TypeDevice
+    public class Admin 
     {
         public int Id { get; set; }
+        public Account Account { get; set; }
+        public int AccountId { get; set; }
         public string Name { get; set; }
-        public ICollection<Device> Devices { get; set; }
+
+
     }
 }
