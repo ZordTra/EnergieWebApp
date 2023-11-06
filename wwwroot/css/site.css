@@ -74,12 +74,17 @@ body {
     top: 20px;
 }
 
-.table{
-    position:relative;
-    top:45px;
+.table {
+    position: relative;
+    top: 45px;
+
 }
 .data{
     padding-right: 50px; 
     border: solid;
     border-color: black;
+    
+}
+#datakop{
+    background-color: #bcb6b6;
 }
