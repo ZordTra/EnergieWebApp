@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-size:  16px;
+    font-size: Â 16px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
@@ -74,14 +74,16 @@ body {
     top: 20px;
 }
 
-.table{
-    position:relative;
-    top:45px;
+.table {
+    position: relative;
+    top: 45px;
+
 }
 .data{
     padding-right: 50px; 
     border: solid;
     border-color: black;
+
 }
 .rectangle {
     position: relative;
@@ -95,5 +97,9 @@ body {
     line-height: 45px;
     font-size: 30px;
     background-color: #e4e86a !important;
-    display: block;
+    display: block;   
+}
+
+#datakop{
+    background-color: #bcb6b6;
 }
