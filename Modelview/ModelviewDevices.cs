@@ -1,8 +1,11 @@
-﻿namespace EnergieWebApp.Modelview
+﻿using EnergieWebApp.Models;
+
+namespace EnergieWebApp.Modelview
 {
     public class ModelviewDevices
     {
-
-        // models to view togheter
+        public Household Household { get; set; }
+        public List<Device> Device { get; set; }
+        
     }
 }
