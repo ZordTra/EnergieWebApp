@@ -4,7 +4,7 @@
     {
         //user
         public int Id { get; set; }
-        //public Date Date { get; set; }
+        public DateTime Date { get; set; }
 
         public int Kwh {  get; set; }
     }

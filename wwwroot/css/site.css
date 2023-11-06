@@ -83,3 +83,17 @@ body {
     border: solid;
     border-color: black;
 }
+.rectangle {
+    position: relative;
+    margin: 20px auto 10px auto !important;
+    padding: 10px 10px;
+    width: 1000px;
+    height: 75px;
+    z-index: 1;
+    text-align: center;
+    text-decoration: none;
+    line-height: 45px;
+    font-size: 30px;
+    background-color: #e4e86a !important;
+    display: block;
+}

@@ -35,8 +35,7 @@ namespace EnergieWebApp.Controllers
                 return NotFound();
             }
 
-            var household = await _context.Households
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var household = await _context.Households.Include(c => c.Devices).FirstOrDefaultAsync(c => c.Id == id);
             if (household == null)
             {
                 return NotFound();
@@ -56,7 +55,7 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Household household)
+        public async Task<IActionResult> Create([Bind("Id,Name,Devices")] Household household)
         {
             if (ModelState.IsValid)
             {
