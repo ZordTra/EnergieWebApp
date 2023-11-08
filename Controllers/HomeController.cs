@@ -13,12 +13,12 @@ namespace EnergieWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult User()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Admin()
         {
             return View();
         }
