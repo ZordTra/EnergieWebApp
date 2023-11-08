@@ -8,13 +8,16 @@
 
 <div>
     <h4>Household</h4>
+    @Model.Name
+    @Model.Devices
+
     @if (Model.Devices != null && Model.Devices.Any())
     {
         <ul>
             @foreach (var Device in Model.Devices)
             {
                 <li>
-                    @Device.Name - Value: @Device.Name
+                    @Device.Name
                     <p>Description: @Device.Kwh</p>
 
                 </li>
@@ -23,9 +26,11 @@
     }
     else
     {
-        <p>No collectables found for this collection.</p>
+        <p>houshold is leeg.</p>
     }
 </div>
+
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

@@ -5,7 +5,7 @@ namespace EnergieWebApp.Modelview
     public class ModelviewDevices
     {
         public Household Household { get; set; }
-        public List<Device> Device { get; set; }
+        public List<Device> Devices { get; set; }
         
     }
 }
