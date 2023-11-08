@@ -30,10 +30,10 @@ namespace EnergieWebApp.Controllers
         // GET: Households/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Households == null)
-            {
-                return NotFound();
-            }
+            //if (id == null || _context.Households == null)
+            //{
+            //    return NotFound();
+            //}
 
             var household = await _context.Households.Include(c => c.Devices).FirstOrDefaultAsync(c => c.Id == id);
             if (household == null)
@@ -47,6 +47,12 @@ namespace EnergieWebApp.Controllers
         // GET: Households/Create
         public IActionResult Create()
         {
+            // Fetch a list of devices from your data source
+            var devices = _context.Devices.ToList();
+
+            // Pass the list of devices to the view
+            ViewBag.Devices = new SelectList(devices, "Id", "Name");
+
             return View();
         }
 
@@ -55,7 +61,8 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Devices")] Household household)
+        // public async Task<IActionResult> Create([Bind("Id,Name,Devices")] Household household)
+        public async Task<IActionResult> Create(Household household)
         {
             if (ModelState.IsValid)
             {
@@ -79,6 +86,11 @@ namespace EnergieWebApp.Controllers
             {
                 return NotFound();
             }
+            // Fetch a list of devices from your data source
+            var devices = _context.Devices.ToList();
+
+            // Pass the list of devices to the view
+            ViewBag.Devices = new SelectList(devices, "Id", "Name");        
             return View(household);
         }
 
@@ -113,6 +125,14 @@ namespace EnergieWebApp.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            foreach (var modelState in ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    // Log or print the validation errors
+                    Console.WriteLine(error.ErrorMessage);
+                }
             }
             return View(household);
         }
