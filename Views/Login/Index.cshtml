@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title> Login patat</title>
+    <link href="~/css/HomeStyle.css" type="text/css" rel="stylesheet" />
+</head>
+
+
+<form asp-action="Login" method="POST">
+    <div id="login"><label for="Username"><b>Username</b></label></div>
+    <div id="UsernameInput"><input type="text" name="Username" required autocomplete="off"></div>
+    <div id="login"><label for="Password"><b>Password</b></label></div>
+    <div id="PasswordInput"><input type="password" name="Password" required autocomplete="off" div>
+
+    <div type="submit" id="login"><button>Login</button></div>
+
+</form>
+<a asp-action="Nieuwe">Nieuw account maken</a>
