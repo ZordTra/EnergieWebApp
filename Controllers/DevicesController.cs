@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
+using EnergieWebApp.Modelview;
 
 namespace EnergieWebApp.Controllers
 {
-    public class DeeevicesController : Controller
+    public class DevicesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public DeeevicesController(ApplicationDbContext context)
+        public DevicesController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -24,7 +25,6 @@ namespace EnergieWebApp.Controllers
         {
             var applicationDbContext = _context.Devices.Include(d => d.Type);
             return View(await applicationDbContext.ToListAsync());
-
         }
 
         // GET: Devices/Details/5
@@ -49,7 +49,10 @@ namespace EnergieWebApp.Controllers
         // GET: Devices/Create
         public IActionResult Create()
         {
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id");
+            
+
+            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name");
+            ViewBag.Types = new SelectList(_context.TypeDevices, "Id", "Name");
             return View();
         }
 
@@ -66,7 +69,7 @@ namespace EnergieWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
+            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name", device.TypeDeviceId);
             return View(device);
         }
 
@@ -83,7 +86,8 @@ namespace EnergieWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Id", device.TypeDeviceId);
+            ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name", device.TypeDeviceId);
+            ViewBag.Types = new SelectList(_context.TypeDevices, "Id", "Name");
             return View(device);
         }
 
