@@ -1,7 +1,30 @@
-﻿@model IEnumerable<User>
+
+﻿@model EnergieWebApp.Models.User
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "User home";
+    Layout = null;
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<header class="navbar">
+    <ul class="navbuttons">
+        <li><a asp-controller="Menu" asp-action="Beheerder">Menu</a></li>
+        <li><a asp-controller="MyUsage" asp-action="Index" asp-route-accID="@Model.AccountId" target="_blank">Mijn energieverbruik</a></li>
+        <li><a asp-controller="Devices" asp-action="Index">Apparaten</a></li>
+        <li><a href="Home.html">Account</a></li>
+        <li><a asp-controller="Households">Huishouden</a></li>
+
+
+    </ul>
+    <img src="~/resources/banner.png" />
+</header>
+
+<div class="text-center">
+    <h1 class="display-4">Welkom</h1>
+
+
 
 <div>
     <table class="scoretable">
@@ -34,4 +57,5 @@
             }
         </tbody>
     </table>
+
 </div>

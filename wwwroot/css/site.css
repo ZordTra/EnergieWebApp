@@ -104,6 +104,12 @@ body {
     background-color: #bcb6b6;
 }
 
+.MyUsageContent{
+    display: flex;
+}
+.advice {
+    width:  350px;
+}
 .scoretable {
     width: 40%;
     border-collapse: collapse;
@@ -114,13 +120,13 @@ body {
     right: 5.0%;
 }
 
-    .scoretable th {
+.scoretable th {
         background-color: #88b414;
         color: white;
         padding: 8px 12px;
         border: 1px solid #e1e1e1;
         font-size: 180%;
-    }
+}
 
 tr:nth-child(n + 11) {
     visibility: hidden;

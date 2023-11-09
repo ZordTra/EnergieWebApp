@@ -39,7 +39,7 @@ namespace EnergieWebApp.Controllers
                 Admin? ad = _context.Admins.Where(u => u.AccountId == a.Id).FirstOrDefault();
                 if (u != null)
                 {
-                    return RedirectToAction("User", "Home");
+                    return RedirectToAction("User", "Home", u);
                 }
                 else if(ad != null) 
                 {

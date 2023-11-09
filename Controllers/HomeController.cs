@@ -13,9 +13,9 @@ namespace EnergieWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult User()
+        public IActionResult User(User user)
         {
-            return View();
+            return View(user);
         }
 
         public IActionResult Admin()
