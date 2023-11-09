@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
+using EnergieWebApp.Modelview;
+using System.Dynamic;
 
 namespace EnergieWebApp.Controllers
 {
@@ -30,18 +32,16 @@ namespace EnergieWebApp.Controllers
         // GET: Households/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            //if (id == null || _context.Households == null)
-            //{
-            //    return NotFound();
-            //}
+            // Fetch a list of devices from your data source
+            var devices = _context.Devices.ToList();
+            Household household = _context.Households.ToList().Where(h => h.Id == id).First();
 
-            var household = await _context.Households.Include(c => c.Devices).FirstOrDefaultAsync(c => c.Id == id);
-            if (household == null)
-            {
-                return NotFound();
-            }
-
-            return View(household);
+            // Pass the list of devices to the view
+            dynamic model = new ExpandoObject();
+            model.Household = household;
+            model.Devices = devices.Where(d => d.HouseholdId == id).ToList();
+            
+            return View(model);
         }
 
         // GET: Households/Create
@@ -90,8 +90,10 @@ namespace EnergieWebApp.Controllers
             var devices = _context.Devices.ToList();
 
             // Pass the list of devices to the view
-            ViewBag.Devices = new SelectList(devices, "Id", "Name");        
-            return View(household);
+            dynamic model = new ExpandoObject();
+            model.Household = household;
+            model.Devices = devices;  
+            return View(model);
         }
 
         // POST: Households/Edit/5

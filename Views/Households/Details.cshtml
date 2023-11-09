@@ -1,4 +1,4 @@
-﻿@model EnergieWebApp.Models.Household
+﻿@model dynamic
 
 @{
     ViewData["Title"] = "Details";
@@ -7,18 +7,16 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Household</h4>
-    @Model.Name
-    @Model.Devices
+    @Model.Household.Name
 
-    @if (Model.Devices != null && Model.Devices.Any())
+    @if (Model.Devices.Count > 0)
     {
         <ul>
             @foreach (var Device in Model.Devices)
             {
                 <li>
                     @Device.Name
-                    <p>Description: @Device.Kwh</p>
+                    <p>Kwh: @Device.Kwh</p>
 
                 </li>
             }
@@ -32,7 +30,7 @@
 
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="AddToHoushold" asp-controller="Devices">Edit</a> |
     <a asp-action="Index">Back to List</a>
     <a> </a>
 </div>

@@ -4,6 +4,7 @@ using EnergieWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnergieWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108123555_scorebord")]
+    partial class scorebord
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,9 +131,6 @@ namespace EnergieWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("HouseholdId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Kwh")
                         .HasColumnType("int");
 
@@ -169,6 +169,21 @@ namespace EnergieWebApp.Data.Migrations
                     b.ToTable("Households");
                 });
 
+            modelBuilder.Entity("EnergieWebApp.Models.HouseholdDevice", b =>
+                {
+                    b.Property<int>("HouseholdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DeviceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("HouseholdId", "DeviceId");
+
+                    b.HasIndex("DeviceId");
+
+                    b.ToTable("HouseholdDevices");
+                });
+
             modelBuilder.Entity("EnergieWebApp.Models.TypeDevice", b =>
                 {
                     b.Property<int>("Id")
@@ -197,14 +212,14 @@ namespace EnergieWebApp.Data.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HouseholdId")
+                    b.Property<int>("HouseholdId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Score")
+                    b.Property<int>("Score")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -480,6 +495,25 @@ namespace EnergieWebApp.Data.Migrations
                     b.Navigation("Type");
                 });
 
+            modelBuilder.Entity("EnergieWebApp.Models.HouseholdDevice", b =>
+                {
+                    b.HasOne("EnergieWebApp.Models.Device", "Device")
+                        .WithMany("HouseholdDevices")
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EnergieWebApp.Models.Household", "Household")
+                        .WithMany("HouseholdDevices")
+                        .HasForeignKey("HouseholdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Device");
+
+                    b.Navigation("Household");
+                });
+
             modelBuilder.Entity("EnergieWebApp.Models.User", b =>
                 {
                     b.HasOne("EnergieWebApp.Models.Account", null)
@@ -490,7 +524,9 @@ namespace EnergieWebApp.Data.Migrations
 
                     b.HasOne("EnergieWebApp.Models.Household", "Household")
                         .WithMany()
-                        .HasForeignKey("HouseholdId");
+                        .HasForeignKey("HouseholdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Household");
                 });
@@ -551,6 +587,16 @@ namespace EnergieWebApp.Data.Migrations
                     b.Navigation("Admin");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EnergieWebApp.Models.Device", b =>
+                {
+                    b.Navigation("HouseholdDevices");
+                });
+
+            modelBuilder.Entity("EnergieWebApp.Models.Household", b =>
+                {
+                    b.Navigation("HouseholdDevices");
                 });
 
             modelBuilder.Entity("EnergieWebApp.Models.TypeDevice", b =>
