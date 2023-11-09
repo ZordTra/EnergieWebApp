@@ -7,7 +7,7 @@
         public DateTime Date { get; set; }
 
         public int Kwh {  get; set; }
-        public ICollection<Device> Devices { get; set; }
+        public ICollection<Device>? Devices { get; set; }
 
 
     }

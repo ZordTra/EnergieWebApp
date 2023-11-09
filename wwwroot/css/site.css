@@ -103,3 +103,9 @@ body {
 #datakop{
     background-color: #bcb6b6;
 }
+.MyUsageContent{
+    display: flex;
+}
+.advice {
+    width:  350px;
+}

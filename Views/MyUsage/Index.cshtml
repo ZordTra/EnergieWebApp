@@ -1,0 +1,74 @@
+﻿@model EnergieWebApp.Modelview.MyUsageViewModel
+@{
+    ViewData["Title"] = "View";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<img class="banner" src="~/resources/banner.png" />
+
+<head> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<h1>View</h1>
+
+
+<div class="MyUsageContent">
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+@if (Model.AverageKwh == null)
+{
+    <img class="advice" src="~/resources/Unknown.jpg">
+}
+else if(Model.AverageKwh < 3)
+{
+    <img class="advice" src="~/resources/Good.png">
+}
+else if (7 > Model.AverageKwh && Model.AverageKwh > 3)
+{
+    <img class="advice" src="~/resources/Neutral.png">
+}
+else
+{
+    <img class="advice" src="~/resources/Bad.png">
+}
+</div>
+
+<div>
+    <a asp-controller="DayDatas" asp-action="Create" asp-route-accID="@Model.accID" target="_blank">Dag toevoegen</a>
+</div>
+
+<script>
+    var xValues = [];
+    var yValues = [];
+
+    @foreach (DayData dayData in Model.DayDatas)
+    {
+        <text>
+        xValues.push("@dayData.Date.ToShortDateString()");
+        yValues.push("@dayData.Kwh");
+        </text>
+    }
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    //yAxes: [{ ticks: { min: 0, max: 16 } }],
+                }
+            }
+        });
+</script>
