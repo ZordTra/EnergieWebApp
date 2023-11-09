@@ -1,5 +1,4 @@
-
-﻿@model EnergieWebApp.Models.User
+@model EnergieWebApp.Modelview.UserHomeViewModel
 @{
     ViewData["Title"] = "User home";
     Layout = null;
@@ -10,8 +9,7 @@
 </head>
 <header class="navbar">
     <ul class="navbuttons">
-        <li><a asp-controller="Menu" asp-action="Beheerder">Menu</a></li>
-        <li><a asp-controller="MyUsage" asp-action="Index" asp-route-accID="@Model.AccountId" target="_blank">Mijn energieverbruik</a></li>
+        <li><a asp-controller="MyUsage" asp-action="Index" asp-route-accID="@Model.User.AccountId" target="_blank">Mijn energieverbruik</a></li>
         <li><a asp-controller="Devices" asp-action="Index">Apparaten</a></li>
         <li><a href="Home.html">Account</a></li>
         <li><a asp-controller="Households">Huishouden</a></li>
@@ -39,13 +37,13 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model != null && Model.Any())
+            @if (Model != null && Model.Scores.Any())
             {
-                @foreach (var item in Model)
+                @foreach (var item in Model.Scores)
                 {
                     <tr>
-                        <td>@(item.Name ?? "No Name")</td>
-                        <td>@(item.Score.HasValue ? item.Score.ToString() : "N/A")</td>
+                        <td>@(item.Item1 ?? "No Name")</td>
+                            <td>@(item.Item2.HasValue ? item.Item2.Value.ToString("N2") : "N/A")</td>
                     </tr>
                 }
             }
