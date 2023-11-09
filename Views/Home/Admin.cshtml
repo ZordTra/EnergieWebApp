@@ -1,7 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Admim home";
     Layout = null;
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Admin</p>
+
+<head>
+    
+    <title>@ViewData["Title"] - EnergieWebApp</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+</head>
+
+<header class="navbar">
+    <ul class="navbuttons">
+        <li><a asp-controller="TypeDevices" asp-action="Index" target="_blank">Soorten</a></li>
+        <li><a href="Home.html">niks</a></li>
+        <li><a href="Home.html">niks</a></li>      
+    </ul>
+    <img src="~/resources/banner.png" />
+</header>

@@ -10,97 +10,87 @@ using EnergieWebApp.Models;
 
 namespace EnergieWebApp.Controllers
 {
-    public class TypeDevicesController : Controller
+    public class AccountsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TypeDevicesController(ApplicationDbContext context)
+        public AccountsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: TypeDevices
+        // GET: Accounts
         public async Task<IActionResult> Index()
         {
-              return _context.TypeDevices != null ? 
-                          View(await _context.TypeDevices.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.TypeDevices'  is null.");
+              return _context.Accounts != null ? 
+                          View(await _context.Accounts.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Accounts'  is null.");
         }
 
-        // GET: TypeDevices/Details/5
+        // GET: Accounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TypeDevices == null)
+            if (id == null || _context.Accounts == null)
             {
                 return NotFound();
             }
 
-            var typeDevice = await _context.TypeDevices
+            var account = await _context.Accounts
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (typeDevice == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(typeDevice);
+            return View(account);
         }
 
-        // GET: TypeDevices/Create
+        // GET: Accounts/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TypeDevices/Create
+        // POST: Accounts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] TypeDevice typeDevice)
+        public async Task<IActionResult> Create([Bind("Id,Username,Password")] Account account)
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine("wel");
-                _context.Add(typeDevice);
+                _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            Console.WriteLine("niet");
-            foreach (var modelState in ModelState.Values)
-            {
-                foreach (var error in modelState.Errors)
-                {
-                    // Log or print the validation errors
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
-            return View(typeDevice);
+            return View(account);
         }
 
-        // GET: TypeDevices/Edit/5
+        // GET: Accounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TypeDevices == null)
+            if (id == null || _context.Accounts == null)
             {
                 return NotFound();
             }
 
-            var typeDevice = await _context.TypeDevices.FindAsync(id);
-            if (typeDevice == null)
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
             {
                 return NotFound();
             }
-            return View(typeDevice);
+            return View(account);
         }
 
-        // POST: TypeDevices/Edit/5
+        // POST: Accounts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] TypeDevice typeDevice)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password")] Account account)
         {
-            if (id != typeDevice.Id)
+            if (id != account.Id)
             {
                 return NotFound();
             }
@@ -109,12 +99,12 @@ namespace EnergieWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(typeDevice);
+                    _context.Update(account);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TypeDeviceExists(typeDevice.Id))
+                    if (!AccountExists(account.Id))
                     {
                         return NotFound();
                     }
@@ -125,49 +115,49 @@ namespace EnergieWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(typeDevice);
+            return View(account);
         }
 
-        // GET: TypeDevices/Delete/5
+        // GET: Accounts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TypeDevices == null)
+            if (id == null || _context.Accounts == null)
             {
                 return NotFound();
             }
 
-            var typeDevice = await _context.TypeDevices
+            var account = await _context.Accounts
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (typeDevice == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(typeDevice);
+            return View(account);
         }
 
-        // POST: TypeDevices/Delete/5
+        // POST: Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TypeDevices == null)
+            if (_context.Accounts == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.TypeDevices'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Accounts'  is null.");
             }
-            var typeDevice = await _context.TypeDevices.FindAsync(id);
-            if (typeDevice != null)
+            var account = await _context.Accounts.FindAsync(id);
+            if (account != null)
             {
-                _context.TypeDevices.Remove(typeDevice);
+                _context.Accounts.Remove(account);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TypeDeviceExists(int id)
+        private bool AccountExists(int id)
         {
-          return (_context.TypeDevices?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

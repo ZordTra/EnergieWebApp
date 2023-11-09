@@ -69,6 +69,9 @@ namespace EnergieWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            
+
             ViewData["TypeDeviceId"] = new SelectList(_context.TypeDevices, "Id", "Name", device.TypeDeviceId);
             return View(device);
         }

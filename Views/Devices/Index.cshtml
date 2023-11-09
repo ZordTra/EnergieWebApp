@@ -16,16 +16,16 @@
     <thead>
         <tr>
             <th class="data" id="datakop">
-                @Html.DisplayNameFor(model => model.Name)
+                Naam
             </th>
             <th class="data" id="datakop">
-                @Html.DisplayNameFor(model => model.Type)
+                Soort
             </th>
             <th class="data" id="datakop">
-                @Html.DisplayNameFor(model => model.Mode)
+                Mode
             </th>
             <th class="data" id="datakop">
-                @Html.DisplayNameFor(model => model.Kwh)
+                Kwh
             </th>
             <th></th>
         </tr>
@@ -46,8 +46,8 @@
                 @Html.DisplayFor(modelItem => item.Kwh)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Bewerken</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
             </td>
         </tr>
 }

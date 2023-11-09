@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
+using EnergieWebApp.Modelview;
 
 namespace EnergieWebApp.Controllers
 {
@@ -48,7 +49,7 @@ namespace EnergieWebApp.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id");
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
             return View();
         }
 
@@ -57,16 +58,40 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HouseholdId,Name,AccountId")] User user)
+        public async Task<IActionResult> Create([Bind("HouseholdId,Name,Username,Password")] CreateUserModelView model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                Account exists = _context.Accounts.Where(a => a.Username ==  model.Username).FirstOrDefault();
+
+                if(exists != null)
+                {
+                    ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
+                    return View();
+                }
+
+                Account a = new Account
+                {
+                    Username = model.Username,
+                    Password = model.Password
+                };
+
+                _context.Accounts.Add(a);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+                User u = new User
+                {
+                    Name = model.Name,
+                    AccountId = a.Id,
+                    HouseholdId = model.HouseholdId
+                };
+                _context.Add(u);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Login");
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", user.HouseholdId);
-            return View(user);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
+            return View();
         }
 
         // GET: Users/Edit/5
@@ -82,7 +107,7 @@ namespace EnergieWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", user.HouseholdId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", user.HouseholdId);
             return View(user);
         }
 
@@ -118,7 +143,7 @@ namespace EnergieWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", user.HouseholdId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", user.HouseholdId);
             return View(user);
         }
 
