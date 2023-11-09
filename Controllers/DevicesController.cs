@@ -61,8 +61,9 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,TypeDeviceId,Mode,Kwh")] Device device)
+        public async Task<IActionResult> Create([Bind("Id,Name,TypeDeviceId,Mode,Kwh,HouseholdId")] Device device)
         {
+            System.Diagnostics.Debug.WriteLine(device.Name);
             if (ModelState.IsValid)
             {
                 _context.Add(device);
