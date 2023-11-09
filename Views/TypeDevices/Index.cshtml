@@ -1,19 +1,26 @@
 ﻿@model IEnumerable<EnergieWebApp.Models.TypeDevice>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Device types";
+    Layout = null;
 }
+<head>
+    <link href="~/css/site.css" type="text/css" rel="stylesheet" />
 
-<h1>Index</h1>
+</head>
+
+<img class="banner" src="~/resources/banner.png" />
+
+<h1>Apparaat soorten</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nieuwe maken</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Naam
             </th>
             <th></th>
         </tr>
@@ -25,9 +32,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Bewerken</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
             </td>
         </tr>
 }
