@@ -25,6 +25,7 @@
 else if(Model.AverageKwh < 3)
 {
     <img class="advice" src="~/resources/Good.png">
+    <p> Goedbezig</p>
 }
 else if (7 > Model.AverageKwh && Model.AverageKwh > 3)
 {
@@ -33,6 +34,10 @@ else if (7 > Model.AverageKwh && Model.AverageKwh > 3)
 else
 {
     <img class="advice" src="~/resources/Bad.png">
+    <p class="advicetext">Oei een hoog verbruik hier zijn een aantal tips:</p>
+        <p class="advicetext">Kies voor energie-efficiënte apparaten bij vervanging.</p>
+        <p class="advicetext">Onderhoud je apparaten regelmatig voor maximale efficiëntie.</p>
+        <p class="advicetext">Gebruik een waslijn of droogrek in plaats van een wasdroger om kleding te drogen. </p>
 }
 </div>
 
