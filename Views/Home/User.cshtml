@@ -24,36 +24,35 @@
 
 
 
-<div>
-    <table class="scoretable">
-        <thead>
-            <tr>
-                <th style="width:50%">
-                    Naam
-                </th>
-                <th>
-                    Score
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Scores.Any())
-            {
-                @foreach (var item in Model.Scores)
+    <div>
+        <table class="scoretable">
+            <thead>
+                <tr>
+                    <th style="width:50%">
+                        Naam
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Scores.Any())
+                {
+                    @foreach (var item in Model.Scores.OrderBy(s => s.Item2.HasValue && s.Item2 != 0 ? s.Item2.Value : double.MaxValue))
+                    {
+                        <tr>
+                            <td>@(item.Item1 ?? "No Name")</td>
+                            <td>@(item.Item2.HasValue ? item.Item2.Value.ToString("N2") : "N/A")</td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@(item.Item1 ?? "No Name")</td>
-                            <td>@(item.Item2.HasValue ? item.Item2.Value.ToString("N2") : "N/A")</td>
+                        <td colspan="2">No data available</td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="2">No data available</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-</div>
+            </tbody>
+        </table>
+    </div>
