@@ -25,19 +25,27 @@
 else if(Model.AverageKwh < 3)
 {
     <img class="advice" src="~/resources/Good.png">
+    <h3> Goedbezig</h3>
+    <p>er zijn altijd verbeteringen maar je bent goed op weg.</p>
 }
 else if (7 > Model.AverageKwh && Model.AverageKwh > 3)
 {
     <img class="advice" src="~/resources/Neutral.png">
+    <h3>normaal energie verbuirk</h3>
+        <p>Kies voor energie-efficiënte apparaten bij vervanging</p>
+        <p>Onderhoud je apparaten regelmatig voor maximale efficiëntie.</p>
 }
 else
 {
     <img class="advice" src="~/resources/Bad.png">
+    <h3 class="advicetext">Oei een hoog verbruik hier zijn een aantal tips:</h3>
+        <p class="advicetext">Kies voor energie-efficiënte apparaten bij vervanging.</p>
+        <p class="advicetext">Onderhoud je apparaten regelmatig voor maximale efficiëntie.</p>
 }
 </div>
 
 <div>
-    <a asp-controller="DayDatas" asp-action="Create" asp-route-accID="@Model.accID" target="_blank">Dag toevoegen</a>
+    <a asp-controller="DayDatas" asp-action="Create" asp-route-accID="@Model.accID" target="_blank" class="textbutton">Dag toevoegen</a>
 </div>
 
 <script>
