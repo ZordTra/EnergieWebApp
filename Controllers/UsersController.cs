@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
-using EnergieWebApp.Modelview;
 
 namespace EnergieWebApp.Controllers
 {
@@ -58,7 +57,7 @@ namespace EnergieWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("HouseholdId,Name,Username,Password")] CreateUserModelView model)
+        public async Task<IActionResult> Create([Bind("HouseholdId,Name,Username,Password")] CreateUserModel model)
         {
             if (ModelState.IsValid)
             {

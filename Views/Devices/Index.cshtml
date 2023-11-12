@@ -1,12 +1,17 @@
 ﻿@model IEnumerable<EnergieWebApp.Models.Device>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Apparaten";
+    Layout = null;
 }
-<head> 
-    <h1>Apparaten</h1>
 
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
 </head>
+<img class="banner" src="~/resources/banner.png" />
+<h1>Apparaten</h1>
+
 
 <div>
     <a asp-action="Create" id="buttonheight" class="textbutton">Nieuwe maken </a>

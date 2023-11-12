@@ -2,11 +2,15 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<img class="banner" src="~/resources/banner.png" />
+<h1>Nieuwe</h1>
 
-<h1>Create</h1>
-
-<h4>Household</h4>
+<h4>Huishouden</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,7 +20,7 @@
                 <label asp-for="Name" class="control-label">Naam</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-                <label for="Devices">Select a Device</label>
+                <label for="Devices">Kies een apparaat</label>
                 <select asp-for="Devices" asp-items="ViewBag.Devices" class="form-control"></select>
             </div>
             <div class="form-group">
