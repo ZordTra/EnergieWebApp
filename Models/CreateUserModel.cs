@@ -1,8 +1,6 @@
-﻿using EnergieWebApp.Models;
-
-namespace EnergieWebApp.Modelview
+﻿namespace EnergieWebApp.Models
 {
-    public class CreateUserModelView
+    public class CreateUserModel
     {
 
         public int HouseholdId { get; set; }

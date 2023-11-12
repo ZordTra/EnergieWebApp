@@ -152,3 +152,7 @@ tr:nth-child(n + 11) {
     display: flex;
     flex-direction: column;
 }
+
+.myUsageButton {
+    margin-top: 20px;
+}

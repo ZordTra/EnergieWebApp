@@ -2,7 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = null;
 }
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<img class="banner" src="~/resources/banner.png" />
 
 <h1>Details</h1>
 
@@ -24,13 +29,14 @@
     }
     else
     {
-        <p>houshold is leeg.</p>
+        <p>Huishouden is leeg.</p>
     }
 </div>
 
 
-<div>
-    <a asp-action="AddToHoushold" asp-controller="Devices" class="textbutton">Edit</a> |
-    <a asp-action="Index" class="textbutton">Back to List</a>
+<div class="myUsageButton">
+    
+    <a asp-action="AddToHoushold" asp-controller="Devices" class="textbutton">Bewerken</a> |
+    <a asp-action="Index" class="textbutton">Terug</a>
     <a> </a>
 </div>

@@ -2,13 +2,18 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = null;
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
+</head>
+<img class="banner" src="~/resources/banner.png" />
 
-<p>
-    <a asp-action="Create" class="textbutton">add Household</a>
-    <a href="Devices" class="textbutton"> add device</a>
+<p class="myUsageButton">
+    <a asp-action="Create" class="textbutton">Huishouden toeoegen</a>
+    <a href="Devices" class="textbutton"> Apparaat toevoegen</a>
 </p>
 
 <body>
@@ -16,7 +21,7 @@
         @foreach (var device in Model)
         {
             <a asp-action ="Details" asp-route-id="@device.Id" class="rectangle">
-                @Html.DisplayNameFor(model => model.Name)
+                Huishouden: 
                 @Html.DisplayFor(modelItem => device.Name)
             </a>
             

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EnergieWebApp.Data;
 using EnergieWebApp.Models;
-using EnergieWebApp.Modelview;
 
 namespace EnergieWebApp.Controllers
 {

@@ -10,11 +10,8 @@
 <header class="navbar">
     <ul class="navbuttons">
         <li><a asp-controller="MyUsage" asp-action="Index" asp-route-accID="@Model.User.AccountId" target="_blank">Mijn energieverbruik</a></li>
-        <li><a asp-controller="Devices" asp-action="Index">Apparaten</a></li>
-
-        <li><a asp-controller="Households" asp-action="Index">Huishouden</a></li>
-
-
+        <li><a asp-controller="Devices" asp-action="Index" target="_blank" >Apparaten</a></li>
+        <li><a asp-controller="Households" asp-action="Index" target="_blank">Huishouden</a></li>
     </ul>
     <img src="~/resources/banner.png" />
 </header>
@@ -32,7 +29,7 @@
                         Naam
                     </th>
                     <th>
-                        Score
+                        Gemmidelde Kwh
                     </th>
                 </tr>
             </thead>
