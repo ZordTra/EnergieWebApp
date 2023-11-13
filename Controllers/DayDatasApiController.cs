@@ -22,64 +22,64 @@ namespace EnergieWebApp.Controllers
         }
 
         // GET: api/DayDatasApi
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<DayData>>> GetDayDatas()
-        {
-          if (_context.DayDatas == null)
-          {
-              return NotFound();
-          }
-            return await _context.DayDatas.ToListAsync();
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<DayData>>> GetDayDatas()
+        //{
+        //  if (_context.DayDatas == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    return await _context.DayDatas.ToListAsync();
+        //}
 
-        // GET: api/DayDatasApi/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DayData>> GetDayData(int id)
-        {
-          if (_context.DayDatas == null)
-          {
-              return NotFound();
-          }
-            var dayData = await _context.DayDatas.FindAsync(id);
+        //// GET: api/DayDatasApi/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<DayData>> GetDayData(int id)
+        //{
+        //  if (_context.DayDatas == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    var dayData = await _context.DayDatas.FindAsync(id);
 
-            if (dayData == null)
-            {
-                return NotFound();
-            }
+        //    if (dayData == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return dayData;
-        }
+        //    return dayData;
+        //}
 
         // PUT: api/DayDatasApi/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDayData(int id, DayData dayData)
-        {
-            if (id != dayData.Id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutDayData(int id, DayData dayData)
+        //{
+        //    if (id != dayData.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(dayData).State = EntityState.Modified;
+        //    _context.Entry(dayData).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DayDataExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context./*SaveChangesAsync*/();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!DayDataExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/DayDatasApi
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
